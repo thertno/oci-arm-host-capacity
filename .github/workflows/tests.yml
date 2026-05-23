@@ -43,7 +43,7 @@ jobs:
           composer update --prefer-dist --no-progress
       - name: Run script
         run: |
-          php index.php
+          php index.php | tee /tmp/oci_output.txt
         env:
           OCI_REGION: ${{ secrets.OCI_REGION }}
           OCI_USER_ID: ${{ secrets.OCI_USER_ID }}
@@ -63,4 +63,11 @@ jobs:
           AD_ALWAYS_FREE: ${{ secrets.AD_ALWAYS_FREE }}
           TEST_IMAGE_ID: ${{ secrets.TEST_IMAGE_ID }}
           TEST_SUBNET_ID: ${{ secrets.TEST_SUBNET_ID }}
+
+      - name: Bark notification on success
+        if: always()
+        run: |
+          if grep -q "lifecycleState" /tmp/oci_output.txt 2>/dev/null; then
+            curl -s "https://www.thertno.top:8443/bark/DgujGTqUdfHgDxBUsW4npR/Oracle%20ARM%20抢到了！/4核24GB实例已创建，去OCI控制台分配公网IP后SSH登录"
+          fi
 
