@@ -53,10 +53,10 @@ jobs:
           OCI_AVAILABILITY_DOMAIN: ${{ secrets.OCI_AVAILABILITY_DOMAIN }}
           OCI_SUBNET_ID: ${{ secrets.OCI_SUBNET_ID }}
           OCI_IMAGE_ID: ${{ secrets.OCI_IMAGE_ID }}
-          OCI_OCPUS: ${{ secrets.OCI_OCPUS }}
-          OCI_MEMORY_IN_GBS: ${{ secrets.OCI_MEMORY_IN_GBS }}
-          OCI_SHAPE: ${{ secrets.OCI_SHAPE }}
-          OCI_MAX_INSTANCES: ${{ secrets.OCI_MAX_INSTANCES }}
+          OCI_OCPUS: 1
+          OCI_MEMORY_IN_GBS: 6
+          OCI_SHAPE: VM.Standard.A1.Flex
+          OCI_MAX_INSTANCES: 1
           OCI_SSH_PUBLIC_KEY: ${{ secrets.OCI_SSH_PUBLIC_KEY }}
           TELEGRAM_USER_ID: ${{ secrets.TELEGRAM_USER_ID }}
           TELEGRAM_BOT_API_KEY: ${{ secrets.TELEGRAM_BOT_API_KEY }}
@@ -68,6 +68,5 @@ jobs:
         if: always()
         run: |
           if grep -q "lifecycleState" /tmp/oci_output.txt 2>/dev/null; then
-            curl -s "https://www.thertno.top:8443/bark/DgujGTqUdfHgDxBUsW4npR/Oracle%20ARM%20抢到了！/4核24GB实例已创建，去OCI控制台分配公网IP后SSH登录"
+            curl -s "https://www.thertno.top:8443/bark/DgujGTqUdfHgDxBUsW4npR/Oracle%20ARM%20抢到了！/1核6GB实例已创建，去OCI控制台分配公网IP后SSH登录"
           fi
-
